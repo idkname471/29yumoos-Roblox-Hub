@@ -1,0 +1,90 @@
+-- Load Rayfield
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+
+-- Create main window
+local Window = Rayfield:CreateWindow({
+    Name = "yumooshub",
+    LoadingTitle = "yumooshub",
+    LoadingSubtitle = "by 29yumoos",
+    ShowText = "yumooshub",
+    Theme = "Amethyst",
+    ConfigurationSaving = {
+        Enabled = true,
+        FolderName = "yumooshub",
+        FileName = "Config"
+    }
+})
+
+-- ===== Main Tab =====
+local MainTab = Window:CreateTab("Main", 4483362458)
+MainTab:CreateButton({
+    Name = "PShade Ultimate",
+    Callback = function()
+        loadstring(game:HttpGet('https://raw.githubusercontent.com/randomstring0/pshade-ultimate/refs/heads/main/src/cd.lua'))()
+    end
+})
+MainTab:CreateButton({
+    Name = "Ez-Hub (150+ games)",
+    Callback = function()
+        loadstring(game:HttpGet("https://rawscripts.net/raw/Ez-Hub_168"))()
+    end
+})
+
+-- ===== Admin Tab =====
+local AdminTab = Window:CreateTab("Admin", 4483362458)
+AdminTab:CreateButton({
+    Name = "Infinite Yield",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
+    end
+})
+AdminTab:CreateButton({
+    Name = "Nameless Admin",
+    Callback = function()
+        loadstring(game:HttpGet('https://raw.githubusercontent.com/FilteringEnabled/NamelessAdmin/main/Source'))()
+    end
+})
+AdminTab:CreateButton({
+    Name = "Fates Admin",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/fatesc/fates-admin/main/main.lua"))()
+    end
+})
+AdminTab:CreateButton({
+    Name = "Infinite Store",
+    Callback = function()
+        Rayfield:Notify({
+            Title = "Notice",
+            Content = "Infinite Store requires Infinite Yield to load first!",
+            Duration = 5,
+            Image = 4483362458
+        })
+    end
+})
+AdminTab:CreateLabel("More admin coming soon...")
+
+-- ===== Settings Tab =====
+local SettingsTab = Window:CreateTab("Settings", 4483362458)
+local ThemeDropdown = SettingsTab:CreateDropdown({
+    Name = "Select Theme",
+    Options = {"Default","AmberGlow","Amethyst","Bloom","DarkBlue","Green","Light","Ocean","Serenity"},
+    CurrentOption = {"Amethyst"},
+    MultipleOptions = false,
+    Callback = function(option)
+        Window:ModifyTheme(option)
+        Rayfield:Notify({
+            Title = "Theme Changed",
+            Content = "Theme is now: "..option,
+            Duration = 4,
+            Image = 4483362458
+        })
+    end
+})
+
+-- ===== Notification Example =====
+Rayfield:Notify({
+    Title = "yumooshub Loaded",
+    Content = "Enjoy your hub!",
+    Duration = 5,
+    Image = 4483362458
+})
