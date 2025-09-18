@@ -1,68 +1,86 @@
-local Rayfield = loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))() -- Keep your Rayfield setup if needed
+--// 29yumoos Hub (Rayfield UI)
+local Rayfield = loadstring(game:HttpGet("https://sirius.menu/rayfield"))()
 
--- Create the Window
 local Window = Rayfield:CreateWindow({
-    Name = "29yumoos Hub",
+    Name = "29yumoos Hub | Beta",
     LoadingTitle = "29yumoos Hub",
     LoadingSubtitle = "by 29yumoos",
-    Theme = "Amethyst",
-    ToggleUIKeybind = "K",
     ConfigurationSaving = {
         Enabled = true,
-        FolderName = nil,
+        FolderName = "29yumoosHubConfigs",
         FileName = "29yumoosHub"
+    },
+    Discord = {
+        Enabled = true,
+        Invite = "5rYVafZbdX", -- your Discord link
+        RememberJoins = true
+    },
+    KeySystem = false, -- set true if you want a key system
+    KeySettings = {
+        Title = "29yumoos Hub | Key System",
+        Subtitle = "Authentication",
+        Note = "Join the Discord for a key!",
+        FileName = "29yumoosKey",
+        SaveKey = true,
+        GrabKeyFromSite = false,
+        Actions = {
+            [1] = {
+                Text = 'Join Discord',
+                OnPress = function()
+                    setclipboard("https://discord.gg/5rYVafZbdX")
+                end
+            }
+        }
     }
 })
 
--- Create Main and Settings Tabs
-local MainTab = Window:CreateTab("Main", "settings")
-local SettingsTab = Window:CreateTab("Settings", "settings")
+--// Tabs
+local HomeTab = Window:CreateTab("Home", 4483362458)
+local BetaTab = Window:CreateTab("Beta Hub", 4483362458)
+local SettingsTab = Window:CreateTab("Settings", 4483362458)
 
--- Main Tab Buttons
-MainTab:CreateButton({
-    Name = "Infinite Yield",
+--// Home Tab Content
+HomeTab:CreateSection("Welcome")
+HomeTab:CreateLabel("Welcome to 29yumoos Hub Beta!")
+HomeTab:CreateButton({
+    Name = "Join Discord",
     Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
+        setclipboard("https://discord.gg/5rYVafZbdX")
         Rayfield:Notify({
-            Title = "Infinite Yield",
-            Content = "Loaded successfully!",
-            Duration = 5,
-            Image = "check-circle"
+            Title = "Discord",
+            Content = "Invite link copied to clipboard!",
+            Duration = 5
         })
     end
 })
 
-MainTab:CreateButton({
-    Name = "Ez Hub",
+--// Beta Hub Loader
+BetaTab:CreateSection("Beta Features")
+BetaTab:CreateButton({
+    Name = "Load Beta Hub V2",
     Callback = function()
-        loadstring(game:HttpGet("https://rawscripts.net/raw/Ez-Hub_168"))()
-        Rayfield:Notify({
-            Title = "Ez Hub",
-            Content = "Loaded successfully!",
-            Duration = 5,
-            Image = "check-circle"
-        })
-    end
-})
-
-MainTab:CreateButton({
-    Name = "Beta Hub",
-    Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/idkname471/29yumoos-Roblox-Hub/refs/heads/main/Newer%20hub"))()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/idkname471/29yumoos-Roblox-Hub/refs/heads/main/YumooshubBetav2.txt"))()
         Rayfield:Notify({
             Title = "Beta Hub",
-            Content = "Loaded successfully!",
-            Duration = 5,
-            Image = "check-circle"
+            Content = "YumoosHub Beta V2 has been loaded!",
+            Duration = 6.5
         })
     end
 })
 
--- Settings Tab for Themes
-local ThemeDropdown = SettingsTab:CreateDropdown({
-    Name = "Theme Selector",
-    Options = {"Default", "Amber Glow", "Amethyst", "Bloom", "Dark Blue", "Green", "Light", "Ocean", "Serenity"},
-    CurrentOption = {"Amethyst"},
-    MultipleOptions = false,
-    Callback = function(option)
-        Window:ModifyTheme(option
+--// Settings Tab (Interface + Configs)
+local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
+local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
+
+SaveManager:SetLibrary(Rayfield)
+InterfaceManager:SetLibrary(Rayfield)
+
+InterfaceManager:BuildInterfaceSection(SettingsTab)
+SaveManager:BuildConfigSection(SettingsTab)
+
+--// Notification when script loads
+Rayfield:Notify({
+    Title = "29yumoos Hub",
+    Content = "Hub Loaded Successfully! (Beta Access)",
+    Duration = 7
+})
